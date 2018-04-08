@@ -39,15 +39,15 @@ namespace Karoku.QLearning
 
         public Vector3 CoordToPoint(int x, int y)
         {
-            return new Vector3(QuadWidth * (x + .5f), QuadHeights * (y + .5f)) + MapOffset;
+            return new Vector3(QuadWidth * (x + .5f), 0f, QuadHeights * (y + .5f)) + MapOffset;
         }
 
         public int[] PointToCoord(Vector3 position)
         {
             position -= MapOffset;
             int[] res = new int[2];
-            res[0] = Mathf.CeilToInt(position.x / Width);
-            res[1] = Mathf.CeilToInt(position.z / Height);
+            res[0] = Mathf.RoundToInt(position.x / QuadWidth - .5f);
+            res[1] = Mathf.RoundToInt(position.z / QuadHeights - .5f);
             return res;
         }
     }
